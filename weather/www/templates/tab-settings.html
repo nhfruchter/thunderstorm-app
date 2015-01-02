@@ -1,0 +1,23 @@
+<ion-view view-title="Settings">
+	<ion-content>
+		<ion-list>			
+			<!-- setting: location -->
+			<ion-item class="item-divider">Location</ion-item>
+			<ion-item class="item-radio">
+				<ion-toggle ng-model="settings.geo" toggle-class="toggle-calm">
+					Use current location
+				</ion-toggle>	
+			</ion-item>
+			<ion-item ng-hide="settings.geo">
+				<input type="text" placeholder="Custom location name..." />
+			</ion-item>
+		
+			<!-- setting: units -->
+			<ion-item class="item-divider">Units</ion-item>
+			<ion-radio ng-model="settings.units" ng-value="'auto'">Auto (&deg;F/&deg;C)</ion-radio>
+			<ion-radio ng-model="settings.units" ng-value="'f'">Fahrenheit</ion-radio>
+			<ion-radio ng-model="settings.units" ng-value="'c'">Celsius</ion-radio>			
+		</ion-list>
+	</ion-content>
+</ion-view>
+
