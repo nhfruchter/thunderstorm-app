@@ -1,1 +1,37 @@
-/* Empty. Add your own CSS if you like */
+/* Global */
+pre { text-align: left; }
+
+/* Main page */
+.wx-wrapper {
+	text-align: right;
+}
+.wx-top {
+	background: #eee;
+}
+.current-icon {
+	font-size: 3.5rem;
+	font-weight: bold;
+}
+.summary {
+	margin-top: 0.5em;
+	font-weight: 500;
+	font-size: 1.25rem;
+}
+.temperature {
+	font-size: 3em;
+	font-weight: bold;
+	margin-top: -0.5rem;
+	margin-bottom: 1rem;
+}
+.item.now, .item.later {
+	white-space: inherit;
+	font-weight: 500;
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+.fc-text {
+	line-height: 2rem;
+	font-weight: 300;
+}
+
+/* Settings */

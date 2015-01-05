@@ -1,6 +1,45 @@
 <ion-view view-title="Thunderstorm">
 <ion-content>
-	<pre>{{weather}}</pre>
+	<div class="wx-wrapper">
+		<ion-item class="wx-top">
+			<div class="current-icon">
+				<i class="fc-{{weather.current.icon}} {{getIcon(weather.current.icon)}} current-icon"></i>
+				{{weather.current.temperature | number:1}}<span class="unit">&deg;</span>
+			</div>	
+			<div class="summary">
+				{{weather.current.summary}} 
+				<span class="precip" ng-if="weather.current.precipProbability>0.05">
+				&bull; {{weather.current.precipProbability*100 | number:0}}% {{weather.current.precipType||"precip"}}
+				</span>
+			</div>				
+		</ion-item>			
+		
+		<ion-item class="now">
+			Now: <span class="fc-text">{{weather.summaries.now}}</span>
+		</ion-item>		
+		
+		<ion-item class="later">
+			Next 24 hours: <span class="fc-text">{{weather.summaries.later}}</span>
+		</ion-item>		
+		<ion-item class="item-divider">Details</ion-item>
+		<ion-item class="details">
+			<table>
+				<tr>
+					<td>Feels like</td>
+					<td>{{weather.current.apparentTemperature|number:0}}&deg;</td>
+				</tr>
+				<tr>
+					<td>Humidity</td>
+					<td>{{weather.current.humidity*100|number:0}}%</td>
+				</tr>
+				<tr>
+					<td>Wind</td>
+					<td>{{weather.current.windBearing}} at {{weather.current.windSpeed}}</td>
+				</tr>	
+			</table>	
+		</ion-item>	
+
+	</div>
 	<div ng-if="error">
 		<pre>{{error}}</pre>
 	</div>	
