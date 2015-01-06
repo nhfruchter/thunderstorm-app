@@ -1,0 +1,15 @@
+<ion-view view-title="Alerts">
+	<ion-content>
+		<ion-list>			
+			<div ng-repeat="alert in weather.alerts">
+				<ion-item class="item-divider">
+					{{alert.title}}
+				</ion-item>
+				<ion-item class="alert-body item-wrap">
+					{{alert.description}}
+				</ion-item>
+			</div>	
+		</ion-list>
+	</ion-content>
+</ion-view>
+

@@ -27,26 +27,5 @@ angular.module('tstorm.services', [])
 	};
 	
 	return (weather);
-})
-
-.factory('IconFactory', function(){
-	var getIcon = function(name) {
-		// [key => value] -> [fcIO icon => ionicon]
-		var mapping = {
-			"clear-day": 'ion-ios7-sunny-outline',
-			"clear-night": 'ion-ios-moon-outline',
-			"rain": 'ion-ios7-rainy-outline',
-			"snow": 'ion-ios7-snowy',
-			"sleet": 'ion-ios7-snowy',
-			"wind": 'ion-leaf',
-			"fog": 'ion-ios7-cloud-outline',
-			"cloudy": 'ion-ios7-cloud-outline',
-			"partly-cloudy-day": 'ion-ios7-partlysunny-outline',
-			"partly-cloudy-night": 'ion-ios7-cloudy-night-outline'
-		};
-		return mapping.hasOwnProperty(name) ? mapping[name] : null;
-	};
-	
-	return (getIcon);
 });
 

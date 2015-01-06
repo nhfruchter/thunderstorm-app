@@ -1,5 +1,8 @@
-<ion-view view-title="Current Weather ({{geo}})">
+<ion-view view-title="{{geo}}" id="home">
 <ion-content>
+	<ion-item href="#/tab/wxalerts" class="item-assertive" ng-if="weather.alerts">
+		Weather Alert <span class="badge badge-light">{{weather.alerts.length}}</span>
+	</ion-item>
 	<div class="wx-wrapper" ng-show="weather">
 		<ion-item class="wx-top">
 			<div class="current-icon">
@@ -22,21 +25,9 @@
 			Next 24 hours: <span class="fc-text">{{weather.summaries.later}}</span>
 		</ion-item>		
 		<ion-item class="item-divider">Details</ion-item>
-		<ion-item class="details">
-			<table>
-				<tr>
-					<td>Feels like</td>
-					<td>{{weather.current.apparentTemperature|number:0}}&deg;</td>
-				</tr>
-				<tr>
-					<td>Humidity</td>
-					<td>{{weather.current.humidity*100|number:0}}%</td>
-				</tr>
-				<tr>
-					<td>Wind</td>
-					<td>{{weather.current.windBearing}} at {{weather.current.windSpeed}}</td>
-				</tr>	
-			</table>	
+		<ion-item class="details item-wrap">
+			<p>It currently feels like <span class="fc-feelslike">{{weather.current.apparentTemperature|number:0}}&deg;</span>. 
+				The humidity level is <span class="fc-humidity">{{weather.current.humidity*100|number:0}}%</span>. Wind is out of the <span class="fc-wind">{{heading(weather.current.windBearing)}} at {{weather.current.windSpeed|number:0}} mph.</span></p>
 		</ion-item>	
 
 	</div>

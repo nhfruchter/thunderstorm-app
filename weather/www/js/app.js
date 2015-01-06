@@ -48,7 +48,17 @@ angular.module('starter', ['ionic', 'ionic.utils', 'tstorm.controllers', 'tstorm
 		  }
 	  }
   })
-
+  
+  .state('tab.wxalerts', {
+	  url: '/wxalerts',
+	  views: {
+		  'tab-wxalerts': {
+			  templateUrl: 'templates/tab-wxalerts.html',
+			  controller: 'AlertsCtrl'
+		  }
+	  }
+  })
+  
   .state('tab.settings', {
     url: '/settings',
     views: {
