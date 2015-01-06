@@ -1,6 +1,6 @@
-<ion-view view-title="Thunderstorm">
+<ion-view view-title="Current Weather ({{geo}})">
 <ion-content>
-	<div class="wx-wrapper">
+	<div class="wx-wrapper" ng-show="weather">
 		<ion-item class="wx-top">
 			<div class="current-icon">
 				<i class="fc-{{weather.current.icon}} {{getIcon(weather.current.icon)}} current-icon"></i>
@@ -40,6 +40,13 @@
 		</ion-item>	
 
 	</div>
+	<div ng-show="!weather">
+		<ion-item class="item-divider">Error</ion-item>
+		<ion-item>
+			Unable to load data from the server.
+			{{CurrentWxService.error}}
+		</ion-item>
+	</div>	
 	<div ng-if="error">
 		<pre>{{error}}</pre>
 	</div>	

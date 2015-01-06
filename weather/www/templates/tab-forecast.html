@@ -1,0 +1,26 @@
+<ion-view view-title="This Week">
+	<ion-content class="wx-wrapper">
+	<div ng-repeat="fc in weather.week" class="forecast">
+		<ion-item class="item-divider" ng-if="!$first">
+			<div class="day">{{fc.time*1000 | date:'EEEE' }}</div>
+		</ion-item>	
+		<ion-item class="wx-top">
+			<div class="current-icon">
+				<p>
+					<span class="fc-precip" ng-if="fc.precipProbability>0.1">{{precipRound(fc.precipProbability*100)}}%</span>					
+					<i class="fc-{{fc.icon}} {{getIcon(fc.icon)}} forecast-icon"></i>
+					<span class="fc-high">{{fc.temperatureMax | number:0}}</span>/<span class="fc-low">{{fc.temperatureMin | number:0}}</span>
+				</p>	
+			</div>	
+			<div class="summary">
+				<span class="fc-text">{{fc.summary}}</span>
+			</div>
+		</ion-item>
+		<ion-item class="fc-temp-detail">	
+			High at {{fc.temperatureMaxTime*1000 | date:'shortTime'}}, low at {{fc.temperatureMinTime*1000 | date:'shortTime'}}.
+		</ion-item>
+		<ion>
+	</div>	
+	</ion-content>
+</ion-view>
+

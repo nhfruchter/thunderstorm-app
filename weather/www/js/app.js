@@ -14,15 +14,13 @@ angular.module('starter', ['ionic', 'ionic.utils', 'tstorm.controllers', 'tstorm
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
+.config(function($urlRouterProvider, $urlRouterProvider, $httpProvider, $stateProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
-
-  // setup an abstract state for the tabs directive
     .state('tab', {
     url: "/tab",
     abstract: true,
@@ -39,6 +37,16 @@ angular.module('starter', ['ionic', 'ionic.utils', 'tstorm.controllers', 'tstorm
         controller: 'HomeCtrl'
       }
     }
+  })
+  
+  .state('tab.forecast', {
+	  url: '/forecast',
+	  views: {
+		  'tab-forecast': {
+			  templateUrl: 'templates/tab-forecast.html',
+			  controller: 'ForecastCtrl'
+		  }
+	  }
   })
 
   .state('tab.settings', {
@@ -77,6 +85,4 @@ angular.module('starter', ['ionic', 'ionic.utils', 'tstorm.controllers', 'tstorm
   $rootScope.$on('loading:hide', function() {
     $ionicLoading.hide()
   });
-})
-
-.constant("FORECAST_KEY", "23517d03e860fa7665659e4abebccd97");
+});
