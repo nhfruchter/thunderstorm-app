@@ -1,26 +1,42 @@
 angular.module('tstorm.controllers', [])
 
-.controller('HomeCtrl', function($rootScope, $scope, CurrentWxService, IconFactory, HeadingToDirection) {
-	$scope.load = function() {
-		$rootScope.weather = new CurrentWxService(30, -97);		
-		$scope.geo = "Austin, TX";		
-	};	
+.controller('HomeCtrl', function($rootScope, $scope, IconFactory, HeadingToDirection, Loader) {
 	$scope.getIcon = IconFactory;
 	$scope.heading = HeadingToDirection;
-	$scope.load();
-})
-.controller('ForecastCtrl', function($rootScope, $scope, $localstorage, IconFactory) {
 	$scope.precipRound = function(x) {
 		return Math.round(x/10)*10;
-	}
+	};
+	
+	$scope.$on('Location.coords', function(){
+		Loader();
+		$scope.locating = false;
+	});
+	$scope.$on('Location.locating', function(){
+		$scope.locating = true;
+	});
+	Loader();
+})
+.controller('ForecastCtrl', function($rootScope, $scope, IconFactory, Loader) {
+
 	$scope.getIcon = IconFactory;
+	
+	$scope.$on('Location.coords', function(){
+		Loader();
+		$scope.locating = false;
+	});
+	$scope.$on('Location.locating', function(){
+		$scope.locating = true;
+	});
+	Loader();
+	
 })
 .controller('AlertsCtrl', function($rootScope, $scope) {
-	return;
+	// Nothing right now.
 })
-.controller('SettingsCtrl', function($scope, $localstorage) {
+.controller('SettingsCtrl', function($rootScope, $scope, $appsettings, GeoSetter) {
 	$scope.settings = {
 		units: 'auto',
 		geo: true 
-	} || $localstorage.getObject('settings');
+	} || $appsettings.get();
+	$scope.locate = GeoSetter;
 });

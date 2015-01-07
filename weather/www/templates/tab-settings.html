@@ -17,6 +17,13 @@
 			<ion-radio ng-model="settings.units" ng-value="'auto'">Auto (&deg;F/&deg;C)</ion-radio>
 			<ion-radio ng-model="settings.units" ng-value="'f'">Fahrenheit</ion-radio>
 			<ion-radio ng-model="settings.units" ng-value="'c'">Celsius</ion-radio>			
+			
+			<ion-item class="item-divider item-calm">About &amp; Feedback</ion-item>
+			<ion-item href="#/tab/about">App and data attribution</ion-item>
+			
+			<ion-item class="item-divider">Debug</ion-item>
+			<pre>Current position: {{currentLocation}}</pre>
+			
 		</ion-list>
 	</ion-content>
 </ion-view>

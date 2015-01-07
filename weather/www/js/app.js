@@ -1,4 +1,4 @@
-angular.module('starter', ['ionic', 'ionic.utils', 'tstorm.controllers', 'tstorm.services'])
+angular.module('tstorm', ['ionic', 'ionic.utils', 'tstorm.controllers', 'tstorm.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -44,7 +44,7 @@ angular.module('starter', ['ionic', 'ionic.utils', 'tstorm.controllers', 'tstorm
 	  views: {
 		  'tab-forecast': {
 			  templateUrl: 'templates/tab-forecast.html',
-			  controller: 'ForecastCtrl'
+			  controller: 'HomeCtrl'
 		  }
 	  }
   })
@@ -65,6 +65,15 @@ angular.module('starter', ['ionic', 'ionic.utils', 'tstorm.controllers', 'tstorm
       'tab-settings': {
         templateUrl: 'templates/tab-settings.html',
         controller: 'SettingsCtrl'
+      }
+    }
+  })
+  
+  .state('tab.about', {
+    url: '/about',
+    views: {
+      'tab-about': {
+        templateUrl: 'templates/tab-about.html'
       }
     }
   });
@@ -89,7 +98,7 @@ angular.module('starter', ['ionic', 'ionic.utils', 'tstorm.controllers', 'tstorm
 })
 .run(function($rootScope, $ionicLoading) {
   $rootScope.$on('loading:show', function() {
-    $ionicLoading.show({template: 'loading...', delay: 250})
+    $ionicLoading.show({template: 'loading...', delay: 50})
   });
 
   $rootScope.$on('loading:hide', function() {

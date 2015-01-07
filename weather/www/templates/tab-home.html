@@ -1,9 +1,9 @@
-<ion-view view-title="{{geo}}" id="home">
+<ion-view view-title="{{currentLocation.name||'Thunderstorm'}}" id="home">
 <ion-content>
-	<ion-item href="#/tab/wxalerts" class="item-assertive" ng-if="weather.alerts">
+	<ion-item href="#/tab/wxalerts" class="item-assertive" ng-if="weather.alerts.length > 0">
 		Weather Alert <span class="badge badge-light">{{weather.alerts.length}}</span>
 	</ion-item>
-	<div class="wx-wrapper" ng-show="weather">
+	<div class="wx-wrapper" ng-show="weather.current">
 		<ion-item class="wx-top">
 			<div class="current-icon">
 				<i class="fc-{{weather.current.icon}} {{getIcon(weather.current.icon)}} current-icon"></i>
@@ -31,15 +31,27 @@
 		</ion-item>	
 
 	</div>
-	<div ng-show="!weather">
-		<ion-item class="item-divider">Error</ion-item>
-		<ion-item>
-			Unable to load data from the server.
-			{{CurrentWxService.error}}
+	
+	<!-- error and status messages -->
+	
+	<div ng-if="!weather.current&&!locating&&weather.error">
+		<ion-item class="item-divider item-dark">Network Error</ion-item>
+		<ion-item class="item-wrap">
+			Unable to load data from server. 
+			<span ng-if="weather.error == 0">
+				Could not connect to the server.
+			</span>	
+			
+			<button class="button button-block button-positive" ng-click="load()">
+				Try Again
+			</button>
 		</ion-item>
 	</div>	
-	<div ng-if="error">
-		<pre>{{error}}</pre>
-	</div>	
+	
+	<div ng-show="locating">
+		<ion-item>
+			Finding your location...
+		</ion-item>	
+	</div> 
 </ion-content>
 </ion-view>
