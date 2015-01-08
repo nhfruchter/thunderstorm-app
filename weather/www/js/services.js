@@ -19,7 +19,7 @@ angular.module('tstorm.services', [])
 .factory('APIEndpointFactory', function(){
 	var FORECAST_KEY = "e9c1ad11607e21727aa61fa08fa79455";
 	var APIendpoint = function(lat, lng, units) {
-		var base = "http://localhost:5000/";
+		var base = "http://tstorm-wx-proxy.herokuapp.com/";
 		var opts = lat + "/" + lng + "/" + units;
 		return base + FORECAST_KEY + "/" + opts;
 	};
@@ -35,6 +35,7 @@ angular.module('tstorm.services', [])
 			
 			wxData.success(function(data){
 				angular.extend(self, data);
+				$rootScope.$broadcast('scroll.refreshComplete');
 			}).error(function(data, status){
 				self.error = status;
 				$ionicLoading.hide();
@@ -48,6 +49,7 @@ angular.module('tstorm.services', [])
 
 .factory('GeoSetter', function($rootScope, Geo) {
 	var locate = function(){
+		console.log("locating...");
 		$rootScope.$broadcast('Location.locating');
 		Geo.getLocation().then(function(position) {
 			var lat = position.coords.latitude;
@@ -61,7 +63,14 @@ angular.module('tstorm.services', [])
 				$rootScope.$broadcast('Location.reversed');				
 			});
 		}, function(error) {
-			navigator.notification.alert("There was an error finding your location: " + error);
+			var geoErrors = {
+				1: "You didn't allow access to your location.",
+				2: "Current position unavailable.",
+				3: "The location request timed out."
+			};
+
+			// navigator.notification.alert(geoErrors[error.code], null, "Location error");
+			$rootScope.$broadcast('Location.error', geoErrors[error.code]);
 		});
 	};
 

@@ -1,5 +1,6 @@
 <ion-view view-title="{{currentLocation.name||'Thunderstorm'}}" id="home">
 <ion-content>
+	<ion-refresher pulling-text="Pull to update..." on-refresh="load()"></ion-refresher>
 	<ion-item href="#/tab/wxalerts" class="item-assertive" ng-if="weather.alerts.length > 0">
 		Weather Alert <span class="badge badge-light">{{weather.alerts.length}}</span>
 	</ion-item>
@@ -49,9 +50,16 @@
 	</div>	
 	
 	<div ng-show="locating">
-		<ion-item>
+		<ion-item ng-show="locating == true">
 			Finding your location...
 		</ion-item>	
+		<ion-item ng-show="locating == -1">
+			{{locationError}}
+			<button class="button button-block button-positive" ng-click="load()">
+				Try Again
+			</button>
+		</ion-item>
 	</div> 
+	
 </ion-content>
 </ion-view>

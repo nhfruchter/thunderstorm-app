@@ -1,5 +1,7 @@
 <ion-view view-title="This Week" id="forecast">
 	<ion-content class="wx-wrapper">
+	<ion-refresher pulling-text="Pull to update..." on-refresh="load()"></ion-refresher>
+	
 		<div ng-repeat="fc in weather.week" class="forecast" ng-if="weather.week">		
 			<ion-item class="item-divider item-positive" ng-if="$first">
 				<div class="day">Today</div>
@@ -30,9 +32,15 @@
 			No data.
 		</ion-item>
 		<div ng-show="locating">
-			<ion-item>
+			<ion-item ng-show="locating == true">
 				Finding your location...
 			</ion-item>	
+			<ion-item ng-show="locating == -1">
+				{{locationError}}
+				<button class="button button-block button-positive" ng-click="load()">
+					Try Again
+				</button>
+			</ion-item>
 		</div> 
 		
 	</ion-content>

@@ -6,6 +6,14 @@ angular.module('tstorm.controllers', [])
 	$scope.precipRound = function(x) {
 		return Math.round(x/10)*10;
 	};
+	$scope.load = function() {
+		Loader();
+	};
+	
+	$scope.$on('Location.error', function(event, args){
+		$scope.locating = -1;
+		$scope.locationError = args;
+	});
 	
 	$scope.$on('Location.coords', function(){
 		Loader();
@@ -14,12 +22,21 @@ angular.module('tstorm.controllers', [])
 	$scope.$on('Location.locating', function(){
 		$scope.locating = true;
 	});
-	Loader();
+	
+	$scope.load();
 })
 .controller('ForecastCtrl', function($rootScope, $scope, IconFactory, Loader) {
 
 	$scope.getIcon = IconFactory;
 	
+	$scope.load = function() {
+		Loader();
+	}
+	
+	$scope.$on('Location.error', function(event, args){
+		$scope.locating = -1;
+		$scope.locationError = args;
+	});
 	$scope.$on('Location.coords', function(){
 		Loader();
 		$scope.locating = false;
@@ -27,7 +44,8 @@ angular.module('tstorm.controllers', [])
 	$scope.$on('Location.locating', function(){
 		$scope.locating = true;
 	});
-	Loader();
+
+	$scope.load();
 	
 })
 .controller('AlertsCtrl', function($rootScope, $scope) {
@@ -38,5 +56,7 @@ angular.module('tstorm.controllers', [])
 		units: 'auto',
 		geo: true 
 	} || $appsettings.get();
-	$scope.locate = GeoSetter;
+	
+	$scope.customLocation = {};
+	
 });

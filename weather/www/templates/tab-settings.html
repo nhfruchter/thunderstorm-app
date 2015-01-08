@@ -9,7 +9,12 @@
 				</ion-toggle>	
 			</ion-item>
 			<ion-item ng-hide="settings.geo">
-				<input type="text" placeholder="Custom location name..." />
+				<input type="text" 
+				ng-autocomplete 
+				ng-model="customLocation.text" 
+				options="{types: 'cities'}" 
+				details="customLocation.details"
+				placeholder="Custom location name..." />
 			</ion-item>
 		
 			<!-- setting: units -->

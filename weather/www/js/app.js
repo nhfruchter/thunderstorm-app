@@ -1,4 +1,4 @@
-angular.module('tstorm', ['ionic', 'ionic.utils', 'tstorm.controllers', 'tstorm.services'])
+angular.module('tstorm', ['ionic', 'ionic.utils', 'tstorm.controllers', 'tstorm.services', 'ngAutocomplete'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -98,7 +98,7 @@ angular.module('tstorm', ['ionic', 'ionic.utils', 'tstorm.controllers', 'tstorm.
 })
 .run(function($rootScope, $ionicLoading) {
   $rootScope.$on('loading:show', function() {
-    $ionicLoading.show({template: 'loading...', delay: 50})
+    $ionicLoading.show({template: 'loading...', delay: 125})
   });
 
   $rootScope.$on('loading:hide', function() {
