@@ -19,7 +19,8 @@ angular.module('tstorm.services', [])
 .factory('APIEndpointFactory', function(){
 	var FORECAST_KEY = "e9c1ad11607e21727aa61fa08fa79455";
 	var APIendpoint = function(lat, lng, units) {
-		var base = "http://tstorm-wx-proxy.herokuapp.com/";
+		// var base = "http://tstorm-wx-proxy.herokuapp.com/";
+		var base = "http://localhost:5000/mock/";
 		var opts = lat + "/" + lng + "/" + units;
 		return base + FORECAST_KEY + "/" + opts;
 	};
@@ -35,6 +36,7 @@ angular.module('tstorm.services', [])
 			
 			wxData.success(function(data){
 				angular.extend(self, data);
+				self.next24 = data.next24.slice(1,25)
 				$rootScope.$broadcast('scroll.refreshComplete');
 			}).error(function(data, status){
 				self.error = status;
@@ -80,7 +82,7 @@ angular.module('tstorm.services', [])
 .factory('Loader', function($rootScope, $appsettings, GeoSetter, CurrentWxService){
 	var load = function() {
 		if ( !$rootScope.currentLocation || !$rootScope.currentLocation.coords ) {
-			GeoSetter();
+			GeoSetter();				
 		} else {
 			delete $rootScope.weather;
 			$rootScope.weather = new CurrentWxService($rootScope.currentLocation.coords[0], 

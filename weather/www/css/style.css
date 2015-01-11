@@ -40,13 +40,36 @@ pre { text-align: left; }
 .item.now, .item.later {
 	white-space: inherit;
 	font-weight: 500;
-/*	padding-top: 8px;
-	padding-bottom: 8px;
-*/}
+}
 .fc-feelslike, .fc-humidity, .fc-wind {
 	font-weight: bold;
 	font-size: 1.05em;
 }
+.fc-next24-hour {
+	max-width: 10em;
+	padding: 0 1em 0 1em;
+	display: inline-table;
+	text-align: center;
+	border-right: 1px solid #ccc;
+	font-weight: 400;
+}
+.fc-next24-time {
+	margin-bottom: 0.5em;
+	background: #eee;
+	padding: 1px;
+	font-size: 0.875em;
+}
+.fc-next24-lower {
+	padding-top: 0.5em;
+}
+.fc-next24-temp {
+	font-size: 1.5em;
+	font-weight: 500;
+}
+.fc-next24-summary {
+	font-weight: 300;
+}
+
 /* Forecast page */
 .forecast .current-icon p {
 	font-size: 3rem;
@@ -65,3 +88,9 @@ pre { text-align: left; }
 	white-space: inherit;
 }
 /* Settings */
+input#custom-location { 
+	background-color: #444;
+	color: #eee;
+	font-weight: 500;
+	font-size: 1.01rem;
+}

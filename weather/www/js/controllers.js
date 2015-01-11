@@ -31,7 +31,7 @@ angular.module('tstorm.controllers', [])
 	
 	$scope.load = function() {
 		Loader();
-	}
+	};
 	
 	$scope.$on('Location.error', function(event, args){
 		$scope.locating = -1;
@@ -57,6 +57,11 @@ angular.module('tstorm.controllers', [])
 		geo: true 
 	} || $appsettings.get();
 	
-	$scope.customLocation = {};
+	$scope.autocomplete = {
+		options: { types: '(regions)' },
+		details: '',
+		text: $rootScope.currentLocation ? $rootScope.currentLocation.name || '' : ''
+	};
+
 	
 });

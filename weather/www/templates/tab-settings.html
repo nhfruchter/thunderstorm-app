@@ -8,14 +8,14 @@
 					Use current location
 				</ion-toggle>	
 			</ion-item>
-			<ion-item ng-hide="settings.geo">
-				<input type="text" 
-				ng-autocomplete 
-				ng-model="customLocation.text" 
-				options="{types: 'cities'}" 
-				details="customLocation.details"
-				placeholder="Custom location name..." />
-			</ion-item>
+			<!-- <ion-item class="item-dark" ng-hide="settings.geo">
+				<input type="text" id="custom-location"
+				ng-autocomplete
+				ng-model="autocomplete.text"
+				options="autocomplete.options"
+				details="autocomplete.details"
+				placeholder="Find a city..." />
+			</ion-item> -->
 		
 			<!-- setting: units -->
 			<ion-item class="item-divider">Units</ion-item>
@@ -28,6 +28,10 @@
 			
 			<ion-item class="item-divider">Debug</ion-item>
 			<pre>Current position: {{currentLocation}}</pre>
+			<pre>Autocomplete: 
+				{{autocomplete.details.address_components[0].short_name}}
+				{{autocomplete.details.address_components[1].short_name}}
+				{{autocomplete.details.geometry.location}}</pre>
 			
 		</ion-list>
 	</ion-content>
