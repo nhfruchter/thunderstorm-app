@@ -29,7 +29,7 @@
 		<ion-item class="item-divider">Details</ion-item>
 		<ion-item class="details item-wrap">
 			<p>It currently feels like <span class="fc-feelslike">{{weather.current.apparentTemperature|number:0}}&deg;</span>. 
-				The humidity level is <span class="fc-humidity">{{weather.current.humidity*100|number:0}}%</span>. Wind is out of the <span class="fc-wind">{{heading(weather.current.windBearing)}} at {{weather.current.windSpeed|number:0}} mph.</span></p>
+				The humidity level is <span class="fc-humidity">{{weather.current.humidity*100|number:0}}%</span>. Wind is out of the <span class="fc-wind">{{heading(weather.current.windBearing)}} at {{weather.current.windSpeed|number:0}}{{speedUnit}}.</p>
 		</ion-item>	
 		
 		<!-- next 24 hrs -->

@@ -12,6 +12,11 @@ angular.module('tstorm.controllers', [])
 		if ( $scope.units == 'auto' ) {
 			delete $scope.units;
 		}
+		$scope.speedUnits = {
+			f: ' mph',
+			c: ' kph',
+			auto: ' '
+		}
 	};
 	
 	$scope.$on('Location.error', function(event, args){
