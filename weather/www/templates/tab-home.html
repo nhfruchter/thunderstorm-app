@@ -57,6 +57,16 @@
 	
 	<!-- error and status messages -->
 	
+	<div ng-if="!weather&&!locating">
+		<ion-item class="locating-message item-text-wrap">
+			<p>Your location just changed.</p>
+			<p>Reload forecast?</p>		
+			<button class="button button-calm" ng-click="load()">
+				<i class="icon ion-refresh"></i>&nbsp;Reload
+			</button>
+		</ion-item>
+	</div>	
+	
 	<div ng-if="!weather.current&&!locating&&weather.error">
 		<ion-item class="item-divider item-dark">Network Error</ion-item>
 		<ion-item class="item-wrap">
@@ -72,9 +82,9 @@
 	</div>	
 	
 	<div ng-show="locating">
-		<ion-item id="locating-message" ng-show="locating == true">
-			<i class="ion-compass ionicon"></i> <br /><br />
-			Finding your location...
+		<ion-item class="locating-message item-text-wrap" ng-show="locating == true">
+			<p><i class="ion-compass ionicon"></i></p>
+			<p>Finding your location...</p>
 		</ion-item>	
 		<ion-item ng-show="locating == -1">
 			{{locationError}}

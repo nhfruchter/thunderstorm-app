@@ -11,13 +11,23 @@ pre { text-align: left; }
 .item-wrap, .item-wrap p {
 	white-space: inherit;
 }
-#locating-message, #locating-message i {
-	text-align: center;
-	text-transform: lowercase;
-	font-size: 1.875em;
+.locating-message {
 	border: none;
-	padding-top: 3em;
+	padding-top: 3rem;
+	text-align: center;
+}
+.locating-message i, .locating-message p {
 	color: #ccc;
+	text-transform: lowercase;
+	font-size: 1.875rem;
+	line-height: 2rem;
+	margin-bottom: 1.5rem;
+}
+.locating-message i {
+	font-size: 3rem;
+}
+.locating-message button i {
+	color: #fff;
 }
 
 /* Main page */
@@ -115,4 +125,12 @@ input#custom-location {
 	color: #eee;
 	font-weight: 500;
 	font-size: 1.01rem;
+	border-bottom: 1px dotted #eee;
+}
+div#confirm-location {
+	color: #B1E795;
+	font-size: 1.625em;
+	position: relative;
+	text-align: right;
+	margin-left: 0.375em;
 }

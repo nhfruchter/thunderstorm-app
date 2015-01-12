@@ -75,7 +75,6 @@ angular.module('tstorm.services', [])
 				3: "The location request timed out."
 			};
 
-			// navigator.notification.alert(geoErrors[error.code], null, "Location error");
 			$rootScope.$broadcast('Location.error', geoErrors[error.code]);
 		});
 	};
@@ -91,20 +90,26 @@ angular.module('tstorm.services', [])
 				$rootScope.currentLocation = $appsettings.get('customLocation');
 			} else {
 				// Geolocation is disabled but no location was specified... so locate.
-				$appsettings.set('geo', true);
+				$appsettings.set('geo', true); // Toggle setting back.
 				GeoSetter();
 			}
-		} else {			
-			if ( !$rootScope.currentLocation || !$rootScope.currentLocation.coords ) {
-				// Normal location needed and there's no stored location.
-				GeoSetter();				
-			} else {
-				delete $rootScope.weather;
-				$rootScope.weather = new CurrentWxService($rootScope.currentLocation.coords[0], 
-														  $rootScope.currentLocation.coords[1],
-														  $appsettings.get('units'));				
-			}
-		}	
+		} else {
+			if ( $rootScope.geoSettingsJustChanged ) {
+				// Force refresh of location if we just toggled the location setting back.
+				GeoSetter();
+			}			
+		}		
+
+		if ( !$rootScope.currentLocation || !$rootScope.currentLocation.coords ) {
+			// Normal location needed and there's no stored location.
+			GeoSetter();				
+		} else {
+			delete $rootScope.weather;
+			$rootScope.weather = new CurrentWxService($rootScope.currentLocation.coords[0], 
+													  $rootScope.currentLocation.coords[1],
+													  $appsettings.get('units'));				
+		}
+
 	};	
 	
 	return (load);

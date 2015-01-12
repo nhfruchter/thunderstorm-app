@@ -51,7 +51,7 @@ angular.module('tstorm.controllers', [])
 .controller('AlertsCtrl', function($rootScope, $scope) {
 	// Nothing right now.
 })
-.controller('SettingsCtrl', function($rootScope, $scope, $appsettings, GeoSetter) {
+.controller('SettingsCtrl', function($rootScope, $scope, $appsettings) {
 	$scope.initSettings = function() {
 		if ( !$appsettings.get('thunderstorm') ) {
 			$appsettings.set('thunderstorm', true);
@@ -63,8 +63,12 @@ angular.module('tstorm.controllers', [])
 			$appsettings.set('geo', true)
 		}
 		$scope.settings = $appsettings.get();		
+		if ( $appsettings.get('geo') === false && $appsettings.get('customLocation') !== null ) {
+			$scope.settings.justSaved = true;
+		}
 		$scope.initAutocomplete();
 	};
+	
 	$scope.initAutocomplete = function() {
 		$scope.autocomplete = {
 			options: { types: '(regions)' },
@@ -73,16 +77,33 @@ angular.module('tstorm.controllers', [])
 		};			
 	};
 	
+	$scope.toggleSave = function() {
+		if (typeof($scope.settings.justSaved) !== 'undefined') {			
+			$scope.settings.justSaved = !$scope.settings.justSaved;
+		}
+	};
+	
 	$scope.save = function(key, value) { 
 		if ( key == 'location' ) {
+			// Set location.
 			$appsettings.set('customLocation', {
 				name: $scope.autocomplete.text,
 				coords: [$scope.autocomplete.details.geometry.location.k, $scope.autocomplete.details.geometry.location.D]
 			});
+			// Toggle save button display.
+			$scope.settings.justSaved = true;
+			// Save location data to global scope.
+			$rootScope.currentLocation = $appsettings.get('customLocation');	
+			// Clear weather if it exists.
+			delete $rootScope.weather;
+			
 		} else {	
 			if ( key == 'geo' && value === true ) {
 				$appsettings.set('customLocation', null);
 				$scope.autocomplete.text = '';
+				delete $rootScope.weather;
+				delete $rootScope.currentLocation;
+				$rootScope.geoSettingsChanged = true;
 			}
 			$appsettings.set(key, value);			
 		}
