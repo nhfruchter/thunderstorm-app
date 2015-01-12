@@ -16,12 +16,20 @@ pre { text-align: left; }
 .wx-wrapper {
 	text-align: left;
 }
+#home .wx-top { 
+	text-align: center; 
+	background: #387ef5;
+	border-color: #387ef5;
+	border-top-color: #0c63ee;
+	color: #fff;
+}
+#forecast .wx-wrapper { text-align: left; }
+
+
 .wx-top {
 	background: #eee;
 	white-space: inherit;
 }
-#home .wx-top { text-align: center; }
-#forecast .wx-wrapper { text-align: left; }
 .current-icon, .current-icon p {
 	font-size: 4rem;
 	font-weight: bold;
@@ -45,6 +53,10 @@ pre { text-align: left; }
 	font-weight: bold;
 	font-size: 1.05em;
 }
+.fc-next24 {
+	padding-right: 0;
+	padding-left: 0;
+}
 .fc-next24-hour {
 	max-width: 10em;
 	padding: 0 1em 0 1em;
@@ -55,8 +67,10 @@ pre { text-align: left; }
 }
 .fc-next24-time {
 	margin-bottom: 0.5em;
-	background: #eee;
+	background: #ebebeb;
+	border: 1px solid #ccc;
 	padding: 1px;
+	font-weight: 500;
 	font-size: 0.875em;
 }
 .fc-next24-lower {

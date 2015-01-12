@@ -26,14 +26,14 @@
 		</ion-item>		
 		
 		<!-- details -->
-		<ion-item class="item-divider">Details</ion-item>
+		<ion-item class="item-divider item-positive">Details</ion-item>
 		<ion-item class="details item-wrap">
 			<p>It currently feels like <span class="fc-feelslike">{{weather.current.apparentTemperature|number:0}}&deg;</span>. 
 				The humidity level is <span class="fc-humidity">{{weather.current.humidity*100|number:0}}%</span>. Wind is out of the <span class="fc-wind">{{heading(weather.current.windBearing)}} at {{weather.current.windSpeed|number:0}} mph.</span></p>
 		</ion-item>	
 		
 		<!-- next 24 hrs -->
-		<ion-item class="item-divider">Hourly Forecast</ion-item>
+		<ion-item class="item-divider item-positive">Hourly Forecast</ion-item>
 		<ion-item class="fc-next24">
 			<ion-scroll direction="x" class="wide-as-needed">
 
@@ -44,7 +44,7 @@
 							<i class="fc-{{hour.icon}} {{getIcon(hour.icon)}} hour-icon"></i> {{hour.temperature | number:0}}&deg;
 						</div>	
 						<div class="fc-next24-summary">
-							{{hour.summary}} <span ng-if="hour.precipProbability>0.1"> ({{hour.precipProbability*100 | number:0}}%)</span>
+							{{hour.summary}} <span ng-if="hour.precipProbability>=0.1">({{ precipRound(hour.precipProbability*100) | number:0}}%)</span>
 						</div>
 					</div>	
 				</div>
