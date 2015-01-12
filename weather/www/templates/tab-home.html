@@ -8,7 +8,7 @@
 		<ion-item class="wx-top">
 			<div class="current-icon">
 				<i class="fc-{{weather.current.icon}} {{getIcon(weather.current.icon)}} current-icon"></i>
-				{{weather.current.temperature | number:1}}<span class="unit">&deg;</span>
+				{{weather.current.temperature | number:1}}<span class="unit">&deg;</span><span class="unit" ng-show="units">{{units}}</span>
 			</div>	
 			<div class="summary">
 				{{weather.current.summary}} 
@@ -67,7 +67,7 @@
 		</ion-item>
 	</div>	
 	
-	<div ng-if="!weather.current&&!locating">
+	<div ng-if="!weather.current&&!locating&&weather.error">
 		<ion-item class="item-divider item-dark">Network Error</ion-item>
 		<ion-item class="item-wrap">
 			<p>Could not load weather data.</p>

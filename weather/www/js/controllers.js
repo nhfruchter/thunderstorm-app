@@ -1,6 +1,6 @@
 angular.module('tstorm.controllers', [])
 
-.controller('HomeCtrl', function($rootScope, $scope, IconFactory, HeadingToDirection, Loader) {
+.controller('HomeCtrl', function($rootScope, $scope, $appsettings, IconFactory, HeadingToDirection, Loader) {
 	$scope.getIcon = IconFactory;
 	$scope.heading = HeadingToDirection;
 	$scope.precipRound = function(x) {
@@ -8,6 +8,10 @@ angular.module('tstorm.controllers', [])
 	};
 	$scope.load = function() {
 		Loader();
+		$scope.units = $appsettings.get('units');
+		if ( $scope.units == 'auto' ) {
+			delete $scope.units;
+		}
 	};
 	
 	$scope.$on('Location.error', function(event, args){

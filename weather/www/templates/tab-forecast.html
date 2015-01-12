@@ -38,7 +38,7 @@
 			</ion-item>
 		</div>	
 	
-		<div ng-if="!weather.week&&!locating">
+	<div ng-if="!weather.current&&!locating&&weather.error">
 			<ion-item class="item-divider item-dark">Network Error</ion-item>
 			<ion-item class="item-wrap">
 				<p>Could not load weather data.</p>

@@ -29,7 +29,13 @@ pre { text-align: left; }
 .locating-message button i {
 	color: #fff;
 }
-
+span.unit {
+	text-transform: uppercase;
+	font-weight: 300;
+}
+span.unit.ng-binding {
+	font-size: 0.875em;
+}
 /* Main page */
 .wx-wrapper {
 	text-align: left;
