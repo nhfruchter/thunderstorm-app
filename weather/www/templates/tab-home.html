@@ -67,16 +67,16 @@
 		</ion-item>
 	</div>	
 	
-	<div ng-if="!weather.current&&!locating&&weather.error">
+	<div ng-if="!weather.current&&!locating">
 		<ion-item class="item-divider item-dark">Network Error</ion-item>
 		<ion-item class="item-wrap">
-			Unable to load data from server. 
-			<span ng-if="weather.error == 0">
-				Could not connect to the server.
-			</span>	
-			
-			<button class="button button-block button-positive" ng-click="load()">
-				Try Again
+			<p>Could not load weather data.</p>
+			<p ng-if="weather.error == 0">
+				The server is currently unreachable.
+			</p>	
+			<p>Pull down or tap "Try Again" to reload.</p>
+			<button class="button button-block" ng-click="load()">
+				<i class="icon ion-refresh"></i>&nbsp; Try Again
 			</button>
 		</ion-item>
 	</div>	

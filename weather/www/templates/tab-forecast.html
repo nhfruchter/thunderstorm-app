@@ -28,12 +28,34 @@
 			</ion-item>
 		</div>	
 		
-		<ion-item ng-if="!weather.week&&!locating">
-			No data.
-		</ion-item>
+		<div ng-if="!weather&&!locating">
+			<ion-item class="locating-message item-text-wrap">
+				<p>Your location just changed.</p>
+				<p>Reload forecast?</p>		
+				<button class="button button-calm" ng-click="load()">
+					<i class="icon ion-refresh"></i>&nbsp;Reload
+				</button>
+			</ion-item>
+		</div>	
+	
+		<div ng-if="!weather.week&&!locating">
+			<ion-item class="item-divider item-dark">Network Error</ion-item>
+			<ion-item class="item-wrap">
+				<p>Could not load weather data.</p>
+				<p ng-if="weather.error == 0">
+					The server is currently unreachable.
+				</p>	
+				<p>Pull down or tap "Try Again" to reload.</p>
+				<button class="button button-block" ng-click="load()">
+					<i class="icon ion-refresh"></i>&nbsp; Try Again
+				</button>
+			</ion-item>
+		</div>	
+	
 		<div ng-show="locating">
-			<ion-item ng-show="locating == true">
-				Finding your location...
+			<ion-item class="locating-message item-text-wrap" ng-show="locating == true">
+				<p><i class="ion-compass ionicon"></i></p>
+				<p>Finding your location...</p>
 			</ion-item>	
 			<ion-item ng-show="locating == -1">
 				{{locationError}}
@@ -41,7 +63,7 @@
 					Try Again
 				</button>
 			</ion-item>
-		</div> 
+		</div>
 		
 	</ion-content>
 </ion-view>
