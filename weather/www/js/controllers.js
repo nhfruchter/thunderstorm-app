@@ -87,6 +87,10 @@ angular.module('tstorm.controllers', [])
 		}
 	};
 	
+	$rootScope.systemBrowser = function(url) {
+		window.open(url, '_system');
+	}
+	
 	$scope.save = function(key, value) { 
 		if ( key == 'location' ) {
 			// Set location.
