@@ -52,16 +52,42 @@ angular.module('tstorm.controllers', [])
 	// Nothing right now.
 })
 .controller('SettingsCtrl', function($rootScope, $scope, $appsettings, GeoSetter) {
-	$scope.settings = {
-		units: 'auto',
-		geo: true 
-	} || $appsettings.get();
-	
-	$scope.autocomplete = {
-		options: { types: '(regions)' },
-		details: '',
-		text: $rootScope.currentLocation ? $rootScope.currentLocation.name || '' : ''
+	$scope.initSettings = function() {
+		if ( !$appsettings.get('thunderstorm') ) {
+			$appsettings.set('thunderstorm', true);
+			$appsettings.set('units', 'auto');
+			$appsettings.set('geo', true);
+			$appsettings.set('customLocation', null);
+		}
+		if ( $appsettings.get('geo') === false && $appsettings.get('customLocation') === null ) {
+			$appsettings.set('geo', true)
+		}
+		$scope.settings = $appsettings.get();		
+		$scope.initAutocomplete();
 	};
-
+	$scope.initAutocomplete = function() {
+		$scope.autocomplete = {
+			options: { types: '(regions)' },
+			details: '',
+			text: $scope.settings.customLocation ? $scope.settings.customLocation.name : ''
+		};			
+	};
+	
+	$scope.save = function(key, value) { 
+		if ( key == 'location' ) {
+			$appsettings.set('customLocation', {
+				name: $scope.autocomplete.text,
+				coords: [$scope.autocomplete.details.geometry.location.k, $scope.autocomplete.details.geometry.location.D]
+			});
+		} else {	
+			if ( key == 'geo' && value === true ) {
+				$appsettings.set('customLocation', null);
+				$scope.autocomplete.text = '';
+			}
+			$appsettings.set(key, value);			
+		}
+	};
+		
+	$scope.initSettings();
 	
 });

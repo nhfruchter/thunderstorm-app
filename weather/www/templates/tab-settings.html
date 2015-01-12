@@ -4,34 +4,40 @@
 			<!-- setting: location -->
 			<ion-item class="item-divider">Location</ion-item>
 			<ion-item class="item-radio">
-				<ion-toggle ng-model="settings.geo" toggle-class="toggle-calm">
+				<ion-toggle ng-model="settings.geo" toggle-class="toggle-calm" ng-change="save('geo', settings.geo)">
 					Use current location
 				</ion-toggle>	
 			</ion-item>
-			<!-- <ion-item class="item-dark" ng-hide="settings.geo">
+			<ion-item class="item-dark" ng-if="!settings.geo">
 				<input type="text" id="custom-location"
 				ng-autocomplete
 				ng-model="autocomplete.text"
 				options="autocomplete.options"
 				details="autocomplete.details"
 				placeholder="Find a city..." />
-			</ion-item> -->
-		
+				
+				<button class="button button-block button-light" 
+				ng-show="autocomplete.text != settings.customLocation.name"
+				ng-click="save('location')">
+					Save Location
+				</button>
+			</ion-item>
+
 			<!-- setting: units -->
 			<ion-item class="item-divider">Units</ion-item>
-			<ion-radio ng-model="settings.units" ng-value="'auto'">Auto (&deg;F/&deg;C)</ion-radio>
-			<ion-radio ng-model="settings.units" ng-value="'f'">Fahrenheit</ion-radio>
-			<ion-radio ng-model="settings.units" ng-value="'c'">Celsius</ion-radio>			
+			<ion-radio ng-model="settings.units" ng-value="'auto'" ng-change="save('units', settings.units)">Auto (&deg;F/&deg;C)</ion-radio>
+			<ion-radio ng-model="settings.units" ng-value="'f'" ng-change="save('units', settings.units)">Fahrenheit</ion-radio>
+			<ion-radio ng-model="settings.units" ng-value="'c'" ng-change="save('units', settings.units)">Celsius</ion-radio>			
 			
 			<ion-item class="item-divider item-calm">About &amp; Feedback</ion-item>
 			<ion-item href="#/tab/about">App and data attribution</ion-item>
+			<ion-item href="http://nathanielfruchter.com/tstormapp" target="_blank">Provide feedback</ion-item>
+			
 			
 			<ion-item class="item-divider">Debug</ion-item>
 			<pre>Current position: {{currentLocation}}</pre>
-			<pre>Autocomplete: 
-				{{autocomplete.details.address_components[0].short_name}}
-				{{autocomplete.details.address_components[1].short_name}}
-				{{autocomplete.details.geometry.location}}</pre>
+			<pre>Autocomplete: {{autocomplete.details.address_components[0].short_name}}
+				{{autocomplete.details.geometry.location}} {{autocomplete.text}}</pre>
 			
 		</ion-list>
 	</ion-content>

@@ -1,7 +1,11 @@
 angular.module('tstorm.services', [])
 .factory('$appsettings', function($localstorage){
 	var _get = function(key) { 
-		return $localstorage.getObject('settings')[key];
+		if (typeof(key) === 'undefined') {
+			return $localstorage.getObject('settings');
+		} else {
+			return $localstorage.getObject('settings')[key];
+		}
 	};
 	
 	var _set = function(key, value) {
@@ -36,7 +40,7 @@ angular.module('tstorm.services', [])
 			
 			wxData.success(function(data){
 				angular.extend(self, data);
-				self.next24 = data.next24.slice(1,25)
+				self.next24 = data.next24.slice(1,25); // Get next 24 hours only.
 				$rootScope.$broadcast('scroll.refreshComplete');
 			}).error(function(data, status){
 				self.error = status;
@@ -81,14 +85,26 @@ angular.module('tstorm.services', [])
 
 .factory('Loader', function($rootScope, $appsettings, GeoSetter, CurrentWxService){
 	var load = function() {
-		if ( !$rootScope.currentLocation || !$rootScope.currentLocation.coords ) {
-			GeoSetter();				
-		} else {
-			delete $rootScope.weather;
-			$rootScope.weather = new CurrentWxService($rootScope.currentLocation.coords[0], 
-													  $rootScope.currentLocation.coords[1],
-													  $appsettings.get('units'));				
-		}
+		if ( $appsettings.get('geo') === false ) {
+			if ( $appsettings.get('customLocation') ){
+				// Geolocation is disabled and a custom location has been specified.				
+				$rootScope.currentLocation = $appsettings.get('customLocation');
+			} else {
+				// Geolocation is disabled but no location was specified... so locate.
+				$appsettings.set('geo', true);
+				GeoSetter();
+			}
+		} else {			
+			if ( !$rootScope.currentLocation || !$rootScope.currentLocation.coords ) {
+				// Normal location needed and there's no stored location.
+				GeoSetter();				
+			} else {
+				delete $rootScope.weather;
+				$rootScope.weather = new CurrentWxService($rootScope.currentLocation.coords[0], 
+														  $rootScope.currentLocation.coords[1],
+														  $appsettings.get('units'));				
+			}
+		}	
 	};	
 	
 	return (load);

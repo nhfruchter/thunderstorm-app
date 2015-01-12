@@ -11,6 +11,14 @@ pre { text-align: left; }
 .item-wrap, .item-wrap p {
 	white-space: inherit;
 }
+#locating-message, #locating-message i {
+	text-align: center;
+	text-transform: lowercase;
+	font-size: 1.875em;
+	border: none;
+	padding-top: 3em;
+	color: #ccc;
+}
 
 /* Main page */
 .wx-wrapper {
