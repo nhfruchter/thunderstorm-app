@@ -4,7 +4,7 @@
 	<ion-item href="#/tab/wxalerts" class="item-assertive" ng-if="weather.alerts.length > 0">
 		Weather Alert <span class="badge badge-light">{{weather.alerts.length}}</span>
 	</ion-item>
-	<div class="wx-wrapper" ng-show="weather.current">
+	<div class="wx-wrapper" ng-show="weather.current&&!locating">
 		<ion-item class="wx-top">
 			<div class="current-icon">
 				<i class="fc-{{weather.current.icon}} {{getIcon(weather.current.icon)}} current-icon"></i>

@@ -60,7 +60,7 @@ angular.module('tstorm.controllers', [])
 .controller('AlertsCtrl', function($rootScope, $scope) {
 	// Nothing right now.
 })
-.controller('SettingsCtrl', function($rootScope, $scope, $appsettings) {
+.controller('SettingsCtrl', function($rootScope, $scope, $appsettings, $timeout) {
 	$scope.initSettings = function() {
 		if ( !$appsettings.get('thunderstorm') ) {
 			$appsettings.set('thunderstorm', true);
@@ -96,6 +96,18 @@ angular.module('tstorm.controllers', [])
 		window.open(url, '_system');
 	}
 	
+	$scope.fixGAutocomplete = function() {
+		/* Fix weird Google autocomplete tap behavior. */
+		
+		$timeout(function(){
+			var el = document.querySelector(".pac-container");
+            el.setAttribute('data-tap-disabled', 'true');
+            el.onclick = function() {
+            	document.getElementById('custom-location').blur();
+            };
+		}, 500);
+	}
+	
 	$scope.save = function(key, value) { 
 		if ( key == 'location' ) {
 			// Set location.
@@ -117,6 +129,9 @@ angular.module('tstorm.controllers', [])
 				delete $rootScope.weather;
 				delete $rootScope.currentLocation;
 				$rootScope.geoSettingsChanged = true;
+			}
+			if ( key == 'geo' && value === false ) {
+				$scope.fixGAutocomplete();
 			}
 			$appsettings.set(key, value);			
 		}
